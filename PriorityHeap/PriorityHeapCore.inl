@@ -118,5 +118,4 @@ void PriorityHeap<Comparable>::printHeap() {
         std::cout<<i<<"+--+"<<PrioH[i]<<std::endl;
     }
 }
-
 #endif //PRIORITYHEAP_PRIORITYHEAPCORE_INL
