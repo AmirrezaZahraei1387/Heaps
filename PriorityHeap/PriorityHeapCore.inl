@@ -118,4 +118,22 @@ void PriorityHeap<Comparable>::printHeap() {
         std::cout<<i<<"+--+"<<PrioH[i]<<std::endl;
     }
 }
+
+template<typename Comparable>
+void PriorityHeap<Comparable>::makeEmpty() {
+    PrioH.clear();
+    currentSize = 0;
+}
+
+template<typename Comparable>
+int PriorityHeap<Comparable>::size() {
+    return currentSize;
+}
+
+template<typename Comparable>
+void PriorityHeap<Comparable>::findPos(const Comparable& element, PriorityHeap::INDEXS &indexs) {
+
+    for()
+}
+
 #endif //PRIORITYHEAP_PRIORITYHEAPCORE_INL

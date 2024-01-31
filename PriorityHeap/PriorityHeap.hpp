@@ -9,6 +9,8 @@
 template<typename Comparable>
 class PriorityHeap{
 public:
+    using INDEXS = std::vector<int>;
+
     explicit PriorityHeap();
     PriorityHeap(std::initializer_list<Comparable> list);
 
@@ -42,6 +44,8 @@ private:
 
     void expand();
     void reduce();
+
+    void findPos(const Comparable& element, INDEXS& indexs);
 };
 
 #include "PriorityHeapCore.inl"

@@ -32,4 +32,8 @@ void PriorityHeap<Comparable>::deleteMin(Comparable &element) {
     percolateDown(1);
 }
 
+template<typename Comparable>
+void PriorityHeap<Comparable>::remove(const Comparable &element) {
+
+}
 #endif //PRIORITYHEAP_PRIORITYHEAPINTER_INL
