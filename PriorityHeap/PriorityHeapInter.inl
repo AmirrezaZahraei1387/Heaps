@@ -17,8 +17,10 @@ void PriorityHeap<Comparable>::deleteMin() {
     if(isEmpty()){
         throw std::underflow_error("request for deleteMin while table is empty");
     }
-    PrioH[1] = std::move(PrioH[currentSize--]);
-    percolateDown(1);
+    PrioH[ROOT_INDEX] = std::move(PrioH[currentSize--]);
+    percolateDown(ROOT_INDEX);
+
+    reduce();
 }
 
 template<typename Comparable>
@@ -27,13 +29,10 @@ void PriorityHeap<Comparable>::deleteMin(Comparable &element) {
         throw std::underflow_error("request for deleteMin while table is empty");
     }
 
-    element = std::move(PrioH[1]);
-    PrioH[1] = std::move(PrioH[currentSize--]);
+    element = std::move(PrioH[ROOT_INDEX]);
+    PrioH[ROOT_INDEX] = std::move(PrioH[currentSize--]);
     percolateDown(1);
-}
 
-template<typename Comparable>
-void PriorityHeap<Comparable>::remove(const Comparable &element) {
-
+    reduce();
 }
 #endif //PRIORITYHEAP_PRIORITYHEAPINTER_INL

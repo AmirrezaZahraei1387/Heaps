@@ -6,6 +6,11 @@
 #include <vector>
 #include <initializer_list>
 
+enum PrintType{
+    AS_ARRAY,
+    AS_TREE,
+};
+
 template<typename Comparable>
 class PriorityHeap{
 public:
@@ -17,23 +22,19 @@ public:
     void insert(const Comparable& element);
     void insert(Comparable&& element);
 
-    void printHeap();
+    void printHeap(PrintType printType, std::ostream& out);
 
     void deleteMin();
     void deleteMin(Comparable& element);
-
-    void remove(const Comparable& element);
 
     bool isEmpty();
     void makeEmpty();
 
     int size();
 
-    void increaseKey(const Comparable& element);
-    void decreaseKey(const Comparable& element);
-
 private:
-    static constexpr int DEFAULT_SIZE{10};
+    static const int ROOT_INDEX{1};
+    static constexpr int DEFAULT_SIZE{13};
     int currentSize{0};
     std::vector<Comparable> PrioH;
 
@@ -42,12 +43,14 @@ private:
     void percolateDown(int hole);
     void percolateUp(int hole);
 
+    void printHeapAsArray(int hole, std::ostream& out);
+    void printHeapAsTree(int hole, std::ostream& out);
+
     void expand();
     void reduce();
-
-    void findPos(const Comparable& element, INDEXS& indexs);
 };
 
 #include "PriorityHeapCore.inl"
+#include "PriorityHeapInter.inl"
 
 #endif //PRIORITYHEAP_PRIORITYHEAP_HPP

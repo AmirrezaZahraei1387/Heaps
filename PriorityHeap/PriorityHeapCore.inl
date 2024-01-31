@@ -4,6 +4,7 @@
 #ifndef PRIORITYHEAP_PRIORITYHEAPCORE_INL
 #define PRIORITYHEAP_PRIORITYHEAPCORE_INL
 #include "PriorityHeap.hpp"
+#include <cmath>
 #include <memory>
 #include <iostream>
 
@@ -100,8 +101,8 @@ void PriorityHeap<Comparable>::expand() {
 
 template<typename Comparable>
 void PriorityHeap<Comparable>::reduce() {
-    if(currentSize <= PrioH.size()/2){
-        PrioH.resize(PrioH.size()/2+1);
+    if(currentSize <= PrioH.size()/2 + 1){
+        PrioH.resize(PrioH.size()/2+3);
     }
 }
 
@@ -113,9 +114,14 @@ void PriorityHeap<Comparable>::buildHeap() {
 }
 
 template<typename Comparable>
-void PriorityHeap<Comparable>::printHeap() {
-    for(int i{1}; i<= currentSize; ++i){
-        std::cout<<i<<"+--+"<<PrioH[i]<<std::endl;
+void PriorityHeap<Comparable>::printHeap(PrintType printType, std::ostream& out) {
+    switch (printType) {
+        case AS_ARRAY:
+            printHeapAsArray(ROOT_INDEX, out);
+            break;
+        case AS_TREE:
+            printHeapAsTree(ROOT_INDEX, out);
+            break;
     }
 }
 
@@ -127,13 +133,30 @@ void PriorityHeap<Comparable>::makeEmpty() {
 
 template<typename Comparable>
 int PriorityHeap<Comparable>::size() {
+
     return currentSize;
 }
 
 template<typename Comparable>
-void PriorityHeap<Comparable>::findPos(const Comparable& element, PriorityHeap::INDEXS &indexs) {
+void PriorityHeap<Comparable>::printHeapAsArray(int hole, std::ostream& out) {
+    for(int i{hole}; i<= currentSize; ++i){
+        out<<PrioH[i]<<std::endl;
+    }
+}
 
-    for()
+template<typename Comparable>
+void PriorityHeap<Comparable>::printHeapAsTree(int hole, std::ostream& out) {
+
+    if(hole > currentSize)
+        return;
+
+    const int height{static_cast<int>(log2(hole))};
+    for(int i{0}; i<height; ++i)
+        out<<"  ";
+    out<<PrioH[hole]<<std::endl;
+
+    printHeapAsTree(hole*2, out);
+    printHeapAsTree(hole*2 + 1, out);
 }
 
 #endif //PRIORITYHEAP_PRIORITYHEAPCORE_INL
